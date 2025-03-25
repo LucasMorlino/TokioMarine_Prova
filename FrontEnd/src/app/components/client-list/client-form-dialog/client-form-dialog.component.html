@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>{{ data.id ? 'Editar' : 'Adicionar' }} Cliente</h2>
+<mat-dialog-content>
+    <form #clientForm="ngForm">
+        <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="data.firstName" name="firstName" required>
+        <mat-error *ngIf="clientForm.controls['firstName']?.errors?.['required']">Nome é obrigatório</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+        <mat-label>Sobrenome</mat-label>
+        <input matInput [(ngModel)]="data.lastName" name="lastName">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="data.email" name="email" required type="email" email>
+        <mat-error *ngIf="clientForm.controls['email']?.errors?.['required']">Email é obrigatório</mat-error>
+        <mat-error *ngIf="clientForm.controls['email']?.errors?.['email']">Email inválido</mat-error>
+        </mat-form-field>
+    </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="data" [disabled]="!clientForm.valid">Salvar</button>
+</mat-dialog-actions>

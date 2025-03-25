@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>{{ data.id ? 'Editar' : 'Adicionar' }} Endereço</h2>
+<mat-dialog-content>
+    <form #addressForm="ngForm">
+        <mat-form-field appearance="fill">
+        <mat-label>ID do Cliente</mat-label>
+        <input matInput [(ngModel)]="data.clientId" name="clientId" required type="number" readonly>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+        <mat-label>CEP</mat-label>
+        <input matInput [(ngModel)]="data.postalCode" name="postalCode" (blur)="searchCep(data.postalCode ?? '')">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+        <mat-label>Endereço</mat-label>
+        <input matInput [(ngModel)]="data.address" name="address" required>
+        <mat-error *ngIf="addressForm.controls['address']?.errors?.['required']">Endereço é obrigatório</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+        <mat-label>Número</mat-label>
+        <input matInput [(ngModel)]="data.number" name="number" required>
+        <mat-error *ngIf="addressForm.controls['number']?.errors?.['required']">Número é obrigatório</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+        <mat-label>Complemento</mat-label>
+        <input matInput [(ngModel)]="data.complement" name="complement">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+        <mat-label>Cidade</mat-label>
+        <input matInput [(ngModel)]="data.city" name="city">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+        <mat-label>Estado</mat-label>
+        <input matInput [(ngModel)]="data.state" name="state">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+        <mat-label>País</mat-label>
+        <input matInput [(ngModel)]="data.country" name="country">
+        </mat-form-field>
+    </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="data" [disabled]="!addressForm.valid">Salvar</button>
+</mat-dialog-actions>

@@ -1,0 +1,22 @@
+CREATE TABLE clients (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255),
+    email VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE addresses (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    client_id BIGINT NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    number VARCHAR(255) NOT NULL,
+    complement VARCHAR(255),
+    postal_code VARCHAR(20),
+    city VARCHAR(255),
+    state VARCHAR(255),
+    country VARCHAR(255),
+    FOREIGN KEY (client_id) REFERENCES clients(id)
+);
+
+ALTER TABLE clients MODIFY COLUMN id BIGINT AUTO_INCREMENT;
+ALTER TABLE addresses MODIFY COLUMN id BIGINT AUTO_INCREMENT;
